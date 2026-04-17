@@ -1,12 +1,12 @@
 "use client";
 
+import { memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserAvatar } from "@/components/layout/user-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Bot } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { formatTime, formatDate } from "@/lib/utils";
+import { cn, formatTime } from "@/lib/utils";
 
 interface ConversationItemProps {
   conversationId: string;
@@ -22,7 +22,7 @@ interface ConversationItemProps {
   unreadCount: number;
 }
 
-export function ConversationItem({
+export const ConversationItem = memo(function ConversationItem({
   conversationId,
   type,
   otherProfiles,
@@ -46,10 +46,10 @@ export function ConversationItem({
     <Link
       href={`/chat/${conversationId}`}
       className={cn(
-        "flex items-center gap-3 rounded-lg p-3 transition-colors",
+        "flex items-center gap-3 rounded-lg p-3 transition-all duration-150",
         isActive
-          ? "bg-accent"
-          : "hover:bg-accent/50",
+          ? "border-l-2 border-primary bg-accent/80"
+          : "border-l-2 border-transparent hover:translate-x-0.5 hover:bg-accent/50",
       )}
     >
       {type === "ai" ? (
@@ -80,7 +80,7 @@ export function ConversationItem({
           {unreadCount > 0 && (
             <Badge
               variant="default"
-              className="ml-2 h-5 min-w-5 shrink-0 justify-center rounded-full px-1.5 text-[10px]"
+              className="ml-2 h-5 min-w-5 shrink-0 justify-center rounded-full px-1.5 text-[10px] shadow-sm shadow-primary/25"
             >
               {unreadCount}
             </Badge>
@@ -89,4 +89,4 @@ export function ConversationItem({
       </div>
     </Link>
   );
-}
+});

@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { cn } from "@/lib/utils";
 import { formatTime } from "@/lib/utils";
 import { UserAvatar } from "@/components/layout/user-avatar";
@@ -18,9 +19,10 @@ interface MessageBubbleProps {
   showName: boolean;
   isFirstInGroup: boolean;
   isLastInGroup: boolean;
+  isPending?: boolean;
 }
 
-export function MessageBubble({
+export const MessageBubble = memo(function MessageBubble({
   content,
   senderName,
   senderAvatarColor,
@@ -32,11 +34,12 @@ export function MessageBubble({
   showName,
   isFirstInGroup,
   isLastInGroup,
+  isPending,
 }: MessageBubbleProps) {
   if (type === "system") {
     return (
       <div className="flex justify-center py-2">
-        <span className="rounded-full bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
+        <span className="rounded-full bg-muted/50 px-3 py-1 text-[11px] text-muted-foreground">
           {content}
         </span>
       </div>
@@ -48,16 +51,17 @@ export function MessageBubble({
   return (
     <div
       className={cn(
-        "flex gap-2",
+        "group flex gap-2",
         isOwn ? "flex-row-reverse" : "flex-row",
-        !isLastInGroup && "mb-0.5",
-        isLastInGroup && "mb-3",
+        !isLastInGroup && "mb-px",
+        isLastInGroup && "mb-4",
+        isPending && "opacity-60",
       )}
     >
       <div className="w-8 shrink-0">
         {showAvatar && !isOwn && (
           isAI ? (
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-purple-500">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-purple-500 shadow-sm shadow-violet-500/20">
               <Bot className="h-4 w-4 text-white" />
             </div>
           ) : (
@@ -72,23 +76,23 @@ export function MessageBubble({
       </div>
       <div
         className={cn(
-          "flex max-w-[75%] flex-col",
+          "flex max-w-[70%] flex-col",
           isOwn ? "items-end" : "items-start",
         )}
       >
         {showName && !isOwn && (
-          <span className="mb-1 px-1 text-xs font-medium text-muted-foreground">
+          <span className="mb-1 px-1 text-[11px] font-medium text-muted-foreground">
             {isAI ? "AI Assistant" : senderName}
           </span>
         )}
         <div
           className={cn(
-            "relative px-3 py-2 text-sm leading-relaxed",
+            "relative px-3.5 py-2.5 text-sm leading-relaxed",
             isOwn
-              ? "bg-primary text-primary-foreground"
+              ? "bg-gradient-to-br from-primary to-primary/85 text-primary-foreground"
               : isAI
-                ? "bg-violet-500/10 text-foreground"
-                : "bg-muted text-foreground",
+                ? "border-l-2 border-violet-400/30 bg-violet-500/10 text-foreground"
+                : "bg-muted ring-1 ring-border/10 text-foreground",
             isFirstInGroup && isLastInGroup && "rounded-2xl",
             isFirstInGroup &&
               !isLastInGroup &&
@@ -110,7 +114,8 @@ export function MessageBubble({
           <p className="whitespace-pre-wrap break-words">{content}</p>
           <span
             className={cn(
-              "mt-1 block text-right text-[10px]",
+              "mt-1 block text-right text-[10px] transition-opacity duration-150",
+              "opacity-0 group-hover:opacity-100",
               isOwn
                 ? "text-primary-foreground/60"
                 : "text-muted-foreground",
@@ -122,4 +127,4 @@ export function MessageBubble({
       </div>
     </div>
   );
-}
+});

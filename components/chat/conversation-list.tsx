@@ -28,10 +28,12 @@ export function ConversationList() {
 
   if (conversations.length === 0) {
     return (
-      <div className="flex flex-1 flex-col items-center justify-center gap-3 p-6 text-muted-foreground">
-        <MessageSquare className="h-8 w-8" />
+      <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-muted-foreground">
+        <div className="rounded-full bg-gradient-to-br from-primary/10 to-pastel-purple/10 p-4">
+          <MessageSquare className="h-7 w-7 text-primary/60" />
+        </div>
         <div className="text-center">
-          <p className="text-sm font-medium">No conversations yet</p>
+          <p className="text-sm font-medium text-foreground/80">No conversations yet</p>
           <p className="mt-1 text-xs">Start a new chat to begin messaging</p>
         </div>
       </div>
@@ -40,7 +42,7 @@ export function ConversationList() {
 
   return (
     <ScrollArea className="flex-1">
-      <div className="space-y-0.5 p-2">
+      <div role="list" aria-label="Conversations" className="space-y-0.5 p-2">
         {conversations.map((conv) =>
           conv ? (
             <ConversationItem

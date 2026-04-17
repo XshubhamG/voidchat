@@ -54,7 +54,7 @@ export function UserMenu() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger
-          className="flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors hover:bg-accent"
+          className="flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors duration-150 hover:bg-accent/80"
         >
             <UserAvatar
               name={profile.displayName}

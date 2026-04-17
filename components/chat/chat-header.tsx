@@ -16,12 +16,13 @@ export function ChatHeader({ name, avatarUrl, avatarColor, type }: ChatHeaderPro
   const router = useRouter();
 
   return (
-    <header className="flex items-center gap-3 border-b border-border/50 bg-card/50 px-4 py-3">
+    <header className="flex items-center gap-3 border-b border-border/30 bg-card/50 backdrop-blur-sm px-4 py-3">
       <Button
         variant="ghost"
         size="icon"
         className="shrink-0 md:hidden"
         onClick={() => router.push("/chat")}
+        aria-label="Back to conversations"
       >
         <ArrowLeft className="h-5 w-5" />
       </Button>
