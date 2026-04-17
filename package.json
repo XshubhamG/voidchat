@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "bunx convex deploy --cmd-url-env-var-name NEXT_PUBLIC_CONVEX_URL --cmd 'bun run build'",
+    "deploy": "bunx convex deploy --cmd 'bun run build'",
     "deploy:convex": "bunx convex deploy"
   },
   "dependencies": {
