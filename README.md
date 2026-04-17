@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VoidChat
+
+Real-time chat application built with Next.js, Convex, and Better Auth.
+
+## Tech Stack
+
+- **Frontend**: Next.js (App Router), TypeScript, TailwindCSS, shadcn/ui
+- **Backend**: Convex (real-time reactive database + server functions)
+- **Auth**: Better Auth (username + password)
+- **AI**: AI SDK + OpenRouter (multi-model support)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Bun](https://bun.sh) (v1.0+)
+- [Convex account](https://convex.dev) (free tier)
+
+### Setup
+
+1. **Install dependencies**
+  ```bash
+   bun install
+  ```
+2. **Start development servers** (runs Next.js + Convex in parallel)
+  ```bash
+   bun run dev
+  ```
+   On first run, Convex CLI will prompt you to create a project.
+3. **Set environment variables**
+  The Convex CLI will create `.env.local` with your deployment URL. Add these:
+   Set the Better Auth secret on your Convex deployment:
+   For AI chat, add your OpenRouter API key:
+4. **Open** [http://localhost:3000](http://localhost:3000)
+
+## Features
+
+- Username + password authentication (no email required)
+- Real-time 1:1 messaging with Convex subscriptions
+- AI chat gateway (OpenRouter, multi-model)
+- Dark theme with pastel accents
+- Message grouping and pagination
+- Mobile responsive layout
+- Deterministic pastel avatars
+
+## Project Structure
+
+```
+app/            Next.js pages and layouts
+components/     React components (auth, chat, layout, ui)
+convex/         Convex backend (schema, queries, mutations, actions)
+lib/            Shared utilities (auth clients, helpers)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
